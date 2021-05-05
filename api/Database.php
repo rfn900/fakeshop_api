@@ -8,10 +8,10 @@
 
 class Database
 {
-    private $servername = $_ENV['DB_SERVERNAME'];
-    private $username = $_ENV['DB_USERNAME'];
-    private $password = $_ENV['DB_PASSWORD'];
-    private $database = $_ENV['DB_NAME'];
+    private $servername = "eu-cdbr-west-01.cleardb.com";
+    private $username = "be29e044447f1e";
+    private $password = "a40f7a97";
+    private $database = "heroku_344e1dbce2b4fd1";
     private $conn = null;
 
     public function __construct()
