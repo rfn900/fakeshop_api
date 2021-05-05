@@ -29,18 +29,18 @@ class Database
     /**
      * Select data from a table
      */
-    private function select($table)
+    private function select($table, $cat)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM $table");
+        $where_cat = $cat == 'total' ? "" : " WHERE category = '$cat'";
+        $stmt = $this->conn->prepare("SELECT * FROM $table" . $where_cat);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //var_dump($result);
         return $result;
     }
 
-    public function getProducts()
+    public function getProducts($cat = 'total')
     {
-        $products = $this->select("products");
+        $products = $this->select("products", $cat);
         return $products;
     }
 }

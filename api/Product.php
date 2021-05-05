@@ -11,6 +11,7 @@ class Product
     /**
      * Instansvariabler
      */
+    private $id;
     private $title;
     private $description;
     private $image;
@@ -20,8 +21,9 @@ class Product
     /**
      * Konstruktor
      */
-    public function __construct($title, $description, $image, $price, $category)
+    public function __construct($id, $title, $description, $image, $price, $category)
     {
+        $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->image = $image;
@@ -35,6 +37,7 @@ class Product
     public function toArray()
     {
         $array = array(
+            "id"  => $this->id,
             "title"  => $this->title,
             "description"   => $this->description,
             "image"     => $this->image,
@@ -45,4 +48,3 @@ class Product
         return $array;
     }
 }
-
