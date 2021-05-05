@@ -8,10 +8,10 @@
 
 class Database
 {
-    private $servername = $_ENV['DB_SERVERNAME'];
-    private $username = $_ENV['DB_USERNAME'];
-    private $password = $_ENV['DB_PASSWORD'];
-    private $database = $_ENV['DB_NAME'];
+    private $servername = getenv('DB_SERVERNAME');
+    private $username = getenv('DB_USERNAME');
+    private $password = getenv('DB_PASSWORD');
+    private $database = getenv('DB_NAME');
     private $conn = null;
 
     public function __construct()
