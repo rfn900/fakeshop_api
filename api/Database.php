@@ -8,10 +8,10 @@
 
 class Database
 {
-    private $servername = "localhost";
-    private $username = "root";
-    private $password = "root";
-    private $database = "fakeshop";
+    private $servername = "eu-cdbr-west-01.cleardb.com";
+    private $username = "be29e044447f1e";
+    private $password = "a40f7a97";
+    private $database = "heroku_344e1dbce2b4fd1";
     private $conn = null;
 
     public function __construct()
