@@ -25,15 +25,35 @@ include_once("Product.php");
 $cat = isset($_GET["category"]) ? htmlspecialchars($_GET["category"]) : "total";
 $db = new Database();
 $products = $db->getProducts($cat);
-$default_limit = count($products);
-$limit = isset($_GET["show"]) ? htmlspecialchars($_GET["show"]) : $default_limit;
+$n_of_items_retrieved = count($products);
+
+if ($n_of_items_retrieved == 0) {
+    $response = array(
+        "Error" => "No items found in the given category => " . $cat
+    );
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    http_response_code(400);
+    die();
+}
+
+$limit = isset($_GET["show"]) ? htmlspecialchars($_GET["show"]) : $n_of_items_retrieved;
+
+if ($n_of_items_retrieved < $limit) {
+    $response = array(
+        "Error" => "Number given exceeds total of entries in database"
+    );
+    echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    http_response_code(400);
+    die();
+}
+
 $product_list = array();
 
 $random_indexes = array();
 
 // This while loop chooses the random indexes to generate random products
 while (count($random_indexes) < $limit) {
-    $index = rand(1, $default_limit);
+    $index = rand(1, $n_of_items_retrieved);
     if (!in_array($index - 1, $random_indexes)) array_push($random_indexes, $index - 1);
 }
 
