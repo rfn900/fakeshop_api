@@ -27,9 +27,9 @@ $db = new Database();
 $products = $db->getProducts($cat);
 $n_of_items_retrieved = count($products);
 
-if ($n_of_items_retrieved == 0) {
+if ($n_of_items_retrieved == 0 || $cat == "") {
     $response = array(
-        "Error" => "No items found in the given category => " . $cat
+        "Error" => "No items found in the given category / Enter a valid category => " . $cat
     );
     echo json_encode($response, JSON_UNESCAPED_UNICODE);
     http_response_code(400);
@@ -38,9 +38,9 @@ if ($n_of_items_retrieved == 0) {
 
 $limit = isset($_GET["show"]) ? htmlspecialchars($_GET["show"]) : $n_of_items_retrieved;
 
-if ($n_of_items_retrieved < $limit) {
+if ($n_of_items_retrieved < $limit || $limit == "") {
     $response = array(
-        "Error" => "Number given exceeds total of entries in database"
+        "Error" => "Please enter a valid number of entries - Max # of items found = " . $n_of_items_retrieved
     );
     echo json_encode($response, JSON_UNESCAPED_UNICODE);
     http_response_code(400);
@@ -75,5 +75,5 @@ while (count($product_list) < $limit) {
     $i += 1;
 }
 
-
+http_response_code(200);
 echo json_encode($product_list, JSON_UNESCAPED_UNICODE);
