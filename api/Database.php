@@ -9,6 +9,7 @@
 class Database
 {
     private $conn = null;
+    private $cat;
 
     public function __construct()
     {
@@ -29,6 +30,20 @@ class Database
         }
     }
 
+    public function setCategory()
+    {
+        $this->cat = isset($_GET["category"]) ? htmlspecialchars($_GET["category"]) : "total";
+    }
+    /**
+     * Returns the requested category
+     *
+     * @return void
+     */
+    public function getCategory()
+    {
+        return $this->cat;
+    }
+
     /**
      * Select data from a table
      */
@@ -40,9 +55,9 @@ class Database
         return $result;
     }
 
-    public function getProducts($cat = 'total')
+    public function getProducts()
     {
-        $where_cat = $cat == 'total' ? "" : " WHERE category = '$cat'";
+        $where_cat = $this->cat == 'total' ? "" : " WHERE category = '$this->cat'";
         $query = "SELECT * FROM products" . $where_cat;
         $products = $this->runQuery($query);
         return $products;
