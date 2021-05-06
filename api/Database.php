@@ -15,7 +15,7 @@ class Database
         $dns = "mysql:host=" . (getenv('DB_SERVERNAME') ? getenv('DB_SERVERNAME') : 'localhost') .
             ";dbname=" . (getenv('DB_NAME') ? getenv('DB_NAME') : 'fakeshop') .
             ";charset=UTF8";
-        //echo getenv('DB_NAME') ? getenv('DB_NAME') : 'localhost';
+
         try {
             $this->conn = new PDO(
                 $dns,
