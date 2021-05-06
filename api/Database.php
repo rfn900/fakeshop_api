@@ -32,10 +32,9 @@ class Database
     /**
      * Select data from a table
      */
-    private function select($table, $cat)
+    private function runQuery($query)
     {
-        $where_cat = $cat == 'total' ? "" : " WHERE category = '$cat'";
-        $stmt = $this->conn->prepare("SELECT * FROM $table" . $where_cat);
+        $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
@@ -43,7 +42,9 @@ class Database
 
     public function getProducts($cat = 'total')
     {
-        $products = $this->select("products", $cat);
+        $where_cat = $cat == 'total' ? "" : " WHERE category = '$cat'";
+        $query = "SELECT * FROM products" . $where_cat;
+        $products = $this->runQuery($query);
         return $products;
     }
 }
