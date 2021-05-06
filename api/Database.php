@@ -8,20 +8,21 @@
 
 class Database
 {
-    //private $servername = "eu-cdbr-west-01.cleardb.com";
-    //private $username = "be29e044447f1e";
-    //private $password = "a40f7a97";
-    //private $database = "heroku_344e1dbce2b4fd1";
     private $conn = null;
 
     public function __construct()
     {
-        //$dns = "mysql:host={$this->servername};dbname={$this->database};charset=UTF8";
-        $dns = "mysql:host=" . getenv('DB_SERVERNAME') . ";dbname=" . getenv('DB_NAME') . ";charset=UTF8";
-
+        $dns = "mysql:host=" . (getenv('DB_SERVERNAME') ? getenv('DB_SERVERNAME') : 'localhost') .
+            ";dbname=" . (getenv('DB_NAME') ? getenv('DB_NAME') : 'fakeshop') .
+            ";charset=UTF8";
+        //echo getenv('DB_NAME') ? getenv('DB_NAME') : 'localhost';
         try {
-            //$this->conn = new PDO($dns, $this->username, $this->password);
-            $this->conn = new PDO($dns, getenv('DB_USERNAME'), getenv('DB_PASSWORD'));
+            $this->conn = new PDO(
+                $dns,
+                getenv('DB_USERNAME') ? getenv('DB_USERNAME') : 'root',
+                getenv('DB_PASSWORD') ? getenv('DB_PASSWORD') : 'root'
+            );
+
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
