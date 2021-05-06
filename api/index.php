@@ -56,4 +56,5 @@ while (count($product_list) < $limit) {
 }
 
 
+echo getenv('DB_NAME');
 echo json_encode($product_list, JSON_UNESCAPED_UNICODE);
