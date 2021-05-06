@@ -16,7 +16,8 @@ class Database
 
     public function __construct()
     {
-        $dns = "mysql:host={$this->servername};dbname={$this->database};charset=UTF8";
+        //$dns = "mysql:host={$this->servername};dbname={$this->database};charset=UTF8";
+        $dns = "mysql:host=" . getenv('DB_SERVERNAME') . ";dbname=" . getenv('DB_NAME') . ";charset=UTF8";
 
         try {
             $this->conn = new PDO($dns, $this->username, $this->password);
