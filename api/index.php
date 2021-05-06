@@ -56,5 +56,5 @@ while (count($product_list) < $limit) {
 }
 
 
-echo getenv('DB_NAME');
+echo getenv('CLEARDB_DATABASE_URL') . "Aqui";
 echo json_encode($product_list, JSON_UNESCAPED_UNICODE);
