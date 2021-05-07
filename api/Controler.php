@@ -4,6 +4,7 @@ include_once("Product.php");
 
 /**
  * En klass som hanterar alla requests
+ * @author Me
  */
 class Controler
 {
@@ -67,7 +68,7 @@ class Controler
 
 
     /**
-     * This function will print the JSON response in case of success
+     * This function will return the JSON response in case of success
      *
      * @return void
      */
@@ -93,7 +94,6 @@ class Controler
             $price = $this->products[$key]['price'];
             $category = $this->products[$key]['category'];
 
-            // Instanstiate a new product object from our Product model class
             $product = new Product($id, $title, $description, $image, $price, $category);
             array_push($this->product_list, $product->toArray());
             $i += 1;
