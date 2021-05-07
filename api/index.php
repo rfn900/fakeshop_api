@@ -19,8 +19,11 @@ header("Referrer-Policy: no-referrer");
 include_once("Database.php");
 include_once("Controler.php");
 
-$db = new Database();
 
+/*
+ * Connect and load from MySQL database.
+ */
+$db = new Database();
 $db->setCategory(); // Reads the category from query
 $cat = $db->getCategory(); // Gets the category value
 $products = $db->getProducts(); // Loads products from DB
@@ -30,7 +33,6 @@ $products = $db->getProducts(); // Loads products from DB
  * methods validate the user queries and prints the JSON
  * response in case of success
  */
-
 $controler = new Controler($products, $cat);
 $controler->validateCategoryRequest();
 $controler->validateNumberRequest();
